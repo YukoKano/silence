@@ -28,7 +28,7 @@ function draw() {
     
     //数値
     //マイク音量取得
-    let vol = mic.getLevel() * 150;
+    let vol = mic.getLevel() * 200;
     
     //時間計測
     time += 1;
@@ -54,14 +54,16 @@ function draw() {
     
 //    ellipse(width / 2, height / 2, 50, 50);
     
-    for(j = 0; j < 5; j++){
+    for(j = 0; j < 10; j++){
         var seed = (j - frameCount) * 0.05;
         var pre_y = noise(seed) * 30 - 30/2 + height/4 * sin(0) + height / 2;
         var c = color(noise(seed) * 255, noise(seed + 1) * 255, noise(seed + 2) * 255, alpha); 
+        
         stroke(c);
         
-        for(i = 0;i < width;i+=3){
+        for(i = 0; i < width; i += 3){
             var y = noise(seed + 0.01 * (i + 1)) * 30 - 30/2 + height/4 * sin(TWO_PI/360*i * 0.8) + height / 2;
+            
             line(i, pre_y, i + 3, y);
             pre_y = y;
         }
