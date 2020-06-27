@@ -39,7 +39,7 @@ function draw() {
     }
     
     //時間が経つとはっきりする、音量で削られる
-    alpha += -vol + 1; 
+    alpha += -vol + 0.1; 
     
     console.log(alpha);
     if(alpha < 0){
