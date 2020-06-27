@@ -27,3 +27,5 @@ function draw() {
   }
 
 }
+
+//http://wgg.hatenablog.jp/entry/20181225/1545703427
