@@ -1,5 +1,5 @@
 let mic;
-let alpha = 100;
+let alpha = 30;
 let time = 0;
 
 function setup() {
@@ -39,7 +39,7 @@ function draw() {
     }
     
     //時間が経つとはっきりする、音量で削られる
-    alpha += -vol + 0.1; 
+    alpha += -vol + 0.05; 
 
     
     //はっきり＆一定時間静か　で音をならしたい……
@@ -59,13 +59,14 @@ function draw() {
         var pre_y = noise(seed) * 30 - 30/2 + height/4 * sin(0) + height / 2;
         var c = color(noise(seed) * 255, noise(seed + 1) * 255, noise(seed + 2) * 255, alpha); 
         stroke(c);
+        
         for(i = 0;i < width;i+=3){
             var y = noise(seed + 0.01 * (i + 1)) * 30 - 30/2 + height/4 * sin(TWO_PI/360*i * 0.8) + height / 2;
             line(i, pre_y, i + 3, y);
             pre_y = y;
         }
+        
     }
-    
     
 }
 
