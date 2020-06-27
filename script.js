@@ -28,7 +28,7 @@ function draw() {
     
     //数値
     //マイク音量取得
-    let vol = mic.getLevel() * 100;
+    let vol = mic.getLevel() * 150;
     
     //時間計測
     time += 1;
