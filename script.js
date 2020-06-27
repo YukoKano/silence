@@ -12,6 +12,8 @@ function setup() {
     
     mic = new p5.AudioIn();
     mic.start();
+    
+    userStartAudio();
 }
 
 // 計算と表示
@@ -22,11 +24,12 @@ function draw() {
 //  ellipse(100, 100, 100);
     
     let vol = mic.getLevel();
+//    console.log(vol);
     fill(255);
     
-  let h = map(vol, 0, 1, 0, 100);
+  let h = map(vol, 0, 1, height, 0);
     
-    ellipse(width / 2, h - 25, 50);
+    ellipse(width / 2, h, 50, 50);
 }
 
 //http://wgg.hatenablog.jp/entry/20181225/1545703427
