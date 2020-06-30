@@ -10,8 +10,6 @@ function setup() {
   window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
   window.addEventListener("touchmove", function (event) { event.preventDefault(); }, { passive: false });
     
-//    noStroke();
-    
     //マイク設定
     mic = new p5.AudioIn();
     mic.start();
@@ -39,9 +37,8 @@ function draw() {
     }
     
     //時間が経つとはっきりする、音量で削られる
-    alpha += -vol + 0.1; 
+    alpha += -vol + 0.3; 
     
-    console.log(alpha);
     if(alpha < 0){
         alpha = 0;
     }
@@ -56,24 +53,24 @@ function draw() {
     
     
     //描画
+    //https://processing-fan.firebaseapp.com/galary/flow/index.html
     
-//    ellipse(width / 2, height / 2, 50, 50);
+    for(var j=0;j<10;j++){
+    let seed = (j + frameCount) * 0.1;
+    let pre_x = noise(seed) *  width / 4 * sin(j * 0.05) + width / 2;
+    let c = color(noise(seed + j) * 50, noise(seed + j + 1) * 200, noise(seed) * 55 + 155);
     
-    for(j = 0; j < 10; j++){
-        var seed = (j - frameCount) * 0.05;
-        var pre_y = noise(seed) * 500 - 500/2 + height/4 * sin(0) + height / 2;
-        var c = color(noise(seed) * 255, noise(seed + 1) * 255, noise(seed + 2) * 255, alpha); 
-        
-        stroke(c);
-        
-        for(i = 0; i < width; i += 3){
-            var y = noise(seed + 0.01 * (i + 1)) * 500 - 500/2 + height/4 * sin(TWO_PI/360*i * 0.8) + height / 2;
-            
-            line(i, pre_y, i + 3, y);
-            pre_y = y;
-        }
-        
+    strokeWeight(1 + noise(seed + j) * 3);
+    stroke(c);
+    
+    for(var i=0;i<height;i+=2){
+
+      let x = noise(seed + 0.03 * (i+1)) *  width / 4 * sin(i * 0.03) + width / 2 + j * 5;
+      line(pre_x, i, x, i + 2);
+      pre_x = x;
     }
+    
+  }
     
 }
 
