@@ -58,7 +58,7 @@ function draw() {
     for(var j=0;j<10;j++){
     let seed = (j + frameCount) * 0.1;
     let pre_x = noise(seed) *  width / 4 * sin(j * 0.05) + width / 2;
-    let c = color(noise(seed + j) * 50, noise(seed + j + 1) * 200, noise(seed) * 55 + 155);
+    let c = color(noise(seed + j) * 50, noise(seed + j + 1) * 200, noise(seed) * 55 + 155, alpha);
     
     strokeWeight(1 + noise(seed + j) * 3);
     stroke(c);
