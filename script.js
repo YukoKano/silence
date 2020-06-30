@@ -37,7 +37,7 @@ function draw() {
     }
     
     //時間が経つとはっきりする、音量で削られる
-    alpha += -vol + 0.3; 
+    alpha += -vol + 0.15; 
     
     if(alpha < 0){
         alpha = 0;
@@ -53,24 +53,27 @@ function draw() {
     
     
     //描画
-    //https://processing-fan.firebaseapp.com/galary/flow/index.html
+    //参考https://processing-fan.firebaseapp.com/galary/flow/index.html
     
-    for(var j=0;j<10;j++){
-    let seed = (j + frameCount) * 0.1;
-    let pre_x = noise(seed) *  width / 4 * sin(j * 0.05) + width / 2;
-    let c = color(noise(seed + j) * 50, noise(seed + j + 1) * 200, noise(seed) * 55 + 155, alpha);
+    for(var j=0;j<8;j++){
     
-    strokeWeight(1 + noise(seed + j) * 3);
+    let seed = (j + time) * 0.1;
+    let pre_x = noise(seed) *  width / 6 * sin(j * 0.2) + width / 2;
+    let c = color(noise(seed + j) * 50 + 100, noise(seed + j + 1) * 200 + 55, noise(seed) * 100 + 155, alpha);
+    
+    strokeWeight(1 + noise(seed + j) * 2);
     stroke(c);
     
-    for(var i=0;i<height;i+=2){
+        for(var i=0;i<height;i+=3){
 
-      let x = noise(seed + 0.03 * (i+1)) *  width / 4 * sin(i * 0.03) + width / 2 + j * 5;
-      line(pre_x, i, x, i + 2);
-      pre_x = x;
+
+          let x = noise(seed + 0.03 * (i+1)) *  width / 6 * sin(i * 0.03) + width / 2 + j * 5;
+          line(pre_x, i, x, i + 3);
+          pre_x = x;
+
+        }
+
     }
-    
-  }
     
 }
 
