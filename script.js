@@ -6,6 +6,7 @@ let bg = 0;
 function setup() {
   // キャンバスをつくる
   createCanvas(windowWidth, windowHeight);
+    frameRate(30);
     
     //メニューバー諸々の削除
   window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
@@ -42,40 +43,39 @@ function draw() {
     
     if(alpha < 0){
         alpha = 0;
-    }else if(alpha > 255){
-        alpha = 255;
+    }else if(alpha > 200){
+        alpha = 200;
     }
-    
-    console.log(alpha);
 
     
-    if(alpha > 250 && time > 100){
-        bg += 0.1;
-    }else{
-        if(bg < 0){
-            bg = 0;
-        }
-        bg -= 0.1;
-    }
+//    if(alpha > 250 && time > 100){
+//        bg += 0.1;
+//    }else{
+//        if(bg < 0){
+//            bg = 0;
+//        }
+//        bg -= 0.1;
+//    }
     
     
     //描画
     //参考https://processing-fan.firebaseapp.com/galary/flow/index.html
     
-    for(var j=0;j<8;j++){
+    for(var j=0; j<10; j++){
     
     let seed = (j + time) * 0.1;
-    let pre_x = noise(seed) *  width/4 * sin(j * 0.2) + width / 2;
+    let pre_x = (0.04 + noise(seed), noise(seed) * 0.8) * 3*width/7 * sin(j * 0.2) + width / 2;
     let c = color(noise(seed + j) * 50 + 100, noise(seed + j + 1) * 200 + 55, noise(seed) * 100 + 155, alpha);
     
     strokeWeight(1 + noise(seed + j) * 2);
     stroke(c);
     
-        for(var i=0;i<height;i+=3){
-          let x = noise(seed + 0.03 * (i+1)) * width/3 * sin(i * 0.03) + width / 2 + j * 5;
-          line(pre_x, i, x, i + 3);
+        for(var i=-50; i<height + 50; i+=5){
+          let y = i + 50 * noise(seed * 0.01);
+          let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/4 * cos(i * 0.03) + width / 2;
+            
+          line(pre_x, y, x, y + 5);
           pre_x = x;
-
         }
 
     }
