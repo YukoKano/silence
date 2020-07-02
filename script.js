@@ -1,6 +1,7 @@
 let mic;
-let alpha = 50;
+let alpha = 0;
 let time = 0;
+let bg = 0;
 
 function setup() {
   // キャンバスをつくる
@@ -21,7 +22,7 @@ function setup() {
 // 計算と表示
 function draw() {
   // 背景をぬりつぶす
-  background(0);
+  background(bg);
     
     
     //数値
@@ -32,7 +33,7 @@ function draw() {
     time += 1;
     
     //音鳴らすとtimeをゼロにする
-    if(vol > 10){
+    if(vol > 5){
         time = 0;
     }
     
@@ -44,11 +45,13 @@ function draw() {
     }
 
     
-    //はっきり＆一定時間静か　で音をならしたい……
-//    if(alpha > 200 && time > 1000){
-//        fill(255, 0, 0, alpha);
+//    if(alpha > 200 && time > 100){
+//        bg += 0.1;
 //    }else{
-//        fill(255, alpha);
+//        if(bg < 0){
+//            bg = 0;
+//        }
+//        bg -= 0.1;
 //    }
     
     
