@@ -42,17 +42,19 @@ function draw() {
     
     if(alpha < 0){
         alpha = 0;
+    }else if(alpha > 255){
+        alpha = 255;
     }
 
     
-//    if(alpha > 200 && time > 100){
-//        bg += 0.1;
-//    }else{
-//        if(bg < 0){
-//            bg = 0;
-//        }
-//        bg -= 0.1;
-//    }
+    if(alpha > 250 && time > 100){
+        bg += 0.1;
+    }else{
+        if(bg < 0){
+            bg = 0;
+        }
+        bg -= 0.1;
+    }
     
     
     //描画
