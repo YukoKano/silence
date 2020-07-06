@@ -53,12 +53,12 @@ function draw() {
     
     
     //時間が経つとはっきりする、音量で削られる
-    alpha += -vol + 0.1; 
+    alpha += -vol + 0.2; 
     
     if(alpha < 0){
         alpha = 0;
-    }else if(alpha > 200){
-        alpha = 200;
+    }else if(alpha > 255){
+        alpha = 255;
     }
     
 
@@ -71,7 +71,7 @@ function draw() {
     let pre_x = (0.04 + noise(seed), noise(seed) * 0.8) * 3*width/7 * sin(j * 10 + seed * 0.01) + width / 2;
     
     //0時と12時が青、6時と18時が赤 0-6,12-18はピンクに変化、6-12,18-24は緑に変化
-    let c = color(50 + 50 * sin(h), noise(seed + j + 1) * 50 + 50, noise(seed) * 80 + 20, alpha);
+    let c = color(50 + 50 * sin(h), noise(seed + j + 1) * 50 + 50, noise(seed) * 50 + 50, alpha);
     
     strokeWeight(1 + noise(seed + j) * 2);
     stroke(c);
