@@ -64,7 +64,7 @@ function draw() {
 
 
     
-    for(var j=0; j<15; j++){
+    for(var j=0; j<10; j++){
     
     
     let seed = (j + elapsedTime * 10) * 0.1;
