@@ -1,11 +1,15 @@
 let mic;
 let alpha = 0;
-let time = 0;
 let bg = 0;
+
+let flow;
+let elapsedTime;
+let startTime;
 
 function setup() {
   // キャンバスをつくる
   createCanvas(windowWidth, windowHeight);
+    colorMode(HSB, 100);
     frameRate(30);
     
     //メニューバー諸々の削除
@@ -18,25 +22,35 @@ function setup() {
     
     //これだいじ ブラウザでマイク許可
     userStartAudio();  
+    
+
+    
+    flow = new FlowField(40);
+    flow.init();
+    
+    startTime = float(millis())/1000; //setupが呼ばれたときからのミリ秒
+    elapsedTime = 0; //経過時間
+    
 }
 
 // 計算と表示
 function draw() {
+    elapsedTime = float(millis()) / 1000 - startTime;
+    
   // 背景をぬりつぶす
-  background(bg);
+    background(bg);
+    
+//    hour = hour();
+    let h = map(hour(), 0, 24, 0, TWO_PI);
+    
+    flow.update();
+    flow.time = elapsedTime;
     
     
     //数値
     //マイク音量取得
     let vol = mic.getLevel() * 100;
     
-    //時間計測
-    time += 1;
-    
-    //音鳴らすとtimeをゼロにする
-    if(vol > 5){
-        time = 0;
-    }
     
     //時間が経つとはっきりする、音量で削られる
     alpha += -vol + 0.1; 
@@ -46,36 +60,35 @@ function draw() {
     }else if(alpha > 200){
         alpha = 200;
     }
+    
+
 
     
-//    if(alpha > 250 && time > 100){
-//        bg += 0.1;
-//    }else{
-//        if(bg < 0){
-//            bg = 0;
-//        }
-//        bg -= 0.1;
-//    }
+    for(var j=0; j<15; j++){
     
     
-    //描画
-    //参考https://processing-fan.firebaseapp.com/galary/flow/index.html
+    let seed = (j + elapsedTime * 10) * 0.1;
+    let pre_x = (0.04 + noise(seed), noise(seed) * 0.8) * 3*width/7 * sin(j * 10 + seed * 0.01) + width / 2;
     
-    for(var j=0; j<10; j++){
-    
-    let seed = (j + time) * 0.1;
-    let pre_x = (0.04 + noise(seed), noise(seed) * 0.8) * 3*width/7 * sin(j * 0.2) + width / 2;
-    let c = color(noise(seed + j) * 50 + 100, noise(seed + j + 1) * 200 + 55, noise(seed) * 100 + 155, alpha);
+    //0時と12時が青、6時と18時が赤 0-6,12-18はピンクに変化、6-12,18-24は緑に変化
+    let c = color(50 + 50 * sin(h), noise(seed + j + 1) * 50 + 50, noise(seed) * 80 + 20, alpha);
     
     strokeWeight(1 + noise(seed + j) * 2);
     stroke(c);
     
-        for(var i=-50; i<height + 50; i+=5){
-          let y = i + 50 * noise(seed * 0.01);
-          let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/4 * cos(i * 0.03) + width / 2;
+        for(var i=-100; i < height + 100; i+=10){
+          let pre_y = i + 100 * noise(seed * 0.01);
             
-          line(pre_x, y, x, y + 5);
+          let pos = createVector(pre_x, pre_y);
+          let fieldPos = flow.lookup(pos);
+            
+          let y = pre_y + 10 + fieldPos.y;
+          let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/3 * cos(i * 0.03 + seed * 0.5) + width / 2 + fieldPos.x * 10;
+            
+          line(pre_x, pre_y, x, y);
+            
           pre_x = x;
+          pre_y = y;
         }
 
     }
