@@ -68,7 +68,7 @@ function draw() {
     let pre_x = (0.04 + noise(seed), noise(seed) * 0.8) * 3*width/7 * sin(j * 10 + seed * 0.01) + width / 2;
     
     //0時と12時が青、6時と18時が赤 0-6,18-24はピンクに変化、6-12, 12-18は緑に変化
-    let c = color(50 + 50 * sin(h), noise(seed + j + 1) * 50 + 50, noise(seed) * 50 + 50, alpha);
+    let c = color(50 + 50 * sin(h), noise(seed + j + 1) * 30 + 70, noise(seed) * 30 + 70, alpha);
     
     strokeWeight(1 + noise(seed + j) * 1.5);
     stroke(c);
