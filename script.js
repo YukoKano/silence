@@ -76,14 +76,14 @@ function draw() {
     strokeWeight(1 + noise(seed + j) * 2);
     stroke(c);
     
-        for(var i=-100; i < height + 100; i+=10){
+        for(var i=-100; i < height + 100; i+=5){
           let pre_y = i + 100 * noise(seed * 0.01);
             
           let pos = createVector(pre_x, pre_y);
-          let fieldPos = flow.lookup(pos);
+          let vec = flow.lookup(pos);
             
-          let y = pre_y + 10 + fieldPos.y;
-          let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/3 * cos(i * 0.03 + seed * 0.5) + width / 2 + fieldPos.x * 10;
+          let y = pre_y + 5 + vec.y;
+          let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/3 * cos(i * 0.03 + seed * 0.5) + width / 2 + vec.x;
             
           line(pre_x, pre_y, x, y);
             
