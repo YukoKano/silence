@@ -9,8 +9,9 @@ let startTime;
 function setup() {
   // キャンバスをつくる
   createCanvas(windowWidth, windowHeight);
+    
     colorMode(HSB, 100);
-    frameRate(24);
+//    frameRate(24);
     
     //メニューバー諸々の削除
   window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
@@ -40,7 +41,6 @@ function draw() {
   // 背景をぬりつぶす
     background(bg);
     
-//    hour = hour();
     let h = map(hour(), 0, 24, 0, TWO_PI);
     
     flow.update();
@@ -60,10 +60,7 @@ function draw() {
     }else if(alpha > 255){
         alpha = 255;
     }
-    
 
-
-    
     for(var j=0; j<15; j++){
     
     
@@ -92,7 +89,6 @@ function draw() {
         }
 
     }
-    
 }
 
 //参考資料
