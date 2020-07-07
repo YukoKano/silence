@@ -73,7 +73,7 @@ function draw() {
     //0時と12時が青、6時と18時が赤 0-6,18-24はピンクに変化、6-12, 12-18は緑に変化
     let c = color(50 + 50 * sin(h), noise(seed + j + 1) * 50 + 50, noise(seed) * 50 + 50, alpha);
     
-    strokeWeight(1 + noise(seed + j) * 2);
+    strokeWeight(0.5 + noise(seed + j) * 2);
     stroke(c);
     
         for(var i=-100; i < height + 100; i+=5){
