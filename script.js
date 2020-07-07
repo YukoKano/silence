@@ -11,7 +11,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
     
     colorMode(HSB, 100);
-//    frameRate(24);
     
     //メニューバー諸々の削除
   window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
@@ -49,16 +48,16 @@ function draw() {
     
     //数値
     //マイク音量取得
-    let vol = mic.getLevel() * 100;
+    let vol = mic.getLevel() * 50;
     
     
     //時間が経つとはっきりする、音量で削られる
-    alpha += -vol + 0.1; 
+    alpha += -vol + 0.05; 
     
     if(alpha < 0){
         alpha = 0;
-    }else if(alpha > 200){
-        alpha = 200;
+    }else if(alpha > 50){
+        alpha = 50;
     }
 
     for(var j=0; j<15; j++){
@@ -73,13 +72,13 @@ function draw() {
     strokeWeight(1 + noise(seed + j) * 1.5);
     stroke(c);
     
-        for(var i=-50; i < height + 50; i+=2){
+        for(var i=-50; i < height + 50; i+=3){
           let pre_y = i + 50 * noise(seed * 0.01);
             
           let pos = createVector(pre_x, pre_y);
           let vec = flow.lookup(pos);
             
-          let y = pre_y + 2 + vec.y;
+          let y = pre_y + 3 + vec.y;
           let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/3 * cos(i * 0.03 + seed * 0.5) + width / 2 + vec.x;
             
           line(pre_x, pre_y, x, y);
@@ -89,6 +88,8 @@ function draw() {
         }
 
     }
+    
+    console.log(alpha);
 }
 
 //参考資料
