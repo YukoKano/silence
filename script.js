@@ -25,7 +25,7 @@ function setup() {
     
 
     
-    flow = new FlowField(40);
+    flow = new FlowField(20);
     flow.init();
     
     startTime = float(millis())/1000; //setupが呼ばれたときからのミリ秒
@@ -53,7 +53,7 @@ function draw() {
     
     
     //時間が経つとはっきりする、音量で削られる
-    alpha += -vol + 0.2; 
+    alpha += -vol + 0.1; 
     
     if(alpha < 0){
         alpha = 0;
@@ -64,13 +64,13 @@ function draw() {
 
 
     
-    for(var j=0; j<10; j++){
+    for(var j=0; j<15; j++){
     
     
     let seed = (j + elapsedTime * 10) * 0.1;
     let pre_x = (0.04 + noise(seed), noise(seed) * 0.8) * 3*width/7 * sin(j * 10 + seed * 0.01) + width / 2;
     
-    //0時と12時が青、6時と18時が赤 0-6,12-18はピンクに変化、6-12,18-24は緑に変化
+    //0時と12時が青、6時と18時が赤 0-6,18-24はピンクに変化、6-12, 12-18は緑に変化
     let c = color(50 + 50 * sin(h), noise(seed + j + 1) * 50 + 50, noise(seed) * 50 + 50, alpha);
     
     strokeWeight(1 + noise(seed + j) * 2);
