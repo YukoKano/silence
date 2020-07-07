@@ -10,7 +10,7 @@ function setup() {
   // キャンバスをつくる
   createCanvas(windowWidth, windowHeight);
     colorMode(HSB, 100);
-    frameRate(30);
+    frameRate(24);
     
     //メニューバー諸々の削除
   window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
@@ -76,13 +76,13 @@ function draw() {
     strokeWeight(1 + noise(seed + j) * 1.5);
     stroke(c);
     
-        for(var i=-100; i < height + 100; i+=3){
-          let pre_y = i + 100 * noise(seed * 0.01);
+        for(var i=-50; i < height + 50; i+=2){
+          let pre_y = i + 50 * noise(seed * 0.01);
             
           let pos = createVector(pre_x, pre_y);
           let vec = flow.lookup(pos);
             
-          let y = pre_y + 5 + vec.y;
+          let y = pre_y + 2 + vec.y;
           let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/3 * cos(i * 0.03 + seed * 0.5) + width / 2 + vec.x;
             
           line(pre_x, pre_y, x, y);
