@@ -20,10 +20,6 @@ function setup() {
     
     colorMode(HSB, 100);
     
-    
-    //マイク設定
-    
-    
     textAlign(CENTER, CENTER);
     isStarted = false;
     isDescribed = false;
@@ -47,6 +43,9 @@ function draw() {
     //flowline start
     if(isStarted == true){
        mic = new p5.AudioIn();
+       mic.start();
+       userStartAudio();
+        
        drawFlowLine();
        if(isDescribed == true){
           description();
@@ -63,8 +62,7 @@ function introduction(){
 
 function drawFlowLine(){
     
-    mic.start();
-    userStartAudio();
+    
     
     elapsedTime = float(millis()) / 1000 - startTime;
     
