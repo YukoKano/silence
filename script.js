@@ -8,18 +8,21 @@ let startTime;
 let isStarted;
 let isDescribed;
 
+function preload() {
+    //メニューバー諸々の削除
+    window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
+    window.addEventListener("touchmove", function (event) { event.preventDefault(); }, { passive: false });
+}
+
 function setup() {
   // キャンバスをつくる
   createCanvas(windowWidth, windowHeight);
     
     colorMode(HSB, 100);
     
-    //メニューバー諸々の削除
-    window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
-    window.addEventListener("touchmove", function (event) { event.preventDefault(); }, { passive: false });
     
     //マイク設定
-    mic = new p5.AudioIn();
+    
     
     textAlign(CENTER, CENTER);
     isStarted = false;
@@ -43,9 +46,7 @@ function draw() {
     
     //flowline start
     if(isStarted == true){
-       mic.start();
-       userStartAudio();
-        
+       mic = new p5.AudioIn();
        drawFlowLine();
        if(isDescribed == true){
           description();
@@ -61,6 +62,10 @@ function introduction(){
 }
 
 function drawFlowLine(){
+    
+    mic.start();
+    userStartAudio();
+    
     elapsedTime = float(millis()) / 1000 - startTime;
     
     background(0);
