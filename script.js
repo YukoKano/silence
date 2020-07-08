@@ -20,9 +20,6 @@ function setup() {
     
     colorMode(HSB, 100);    
     textAlign(CENTER, CENTER);
-    
-    
-        
 
     isStarted = false;
     isDescribed = false;
@@ -44,11 +41,9 @@ function draw() {
     }
     
     //flowline start
-    if(mic.enabled == true){
-            isStarted = true;
-    }
+//    console.log(mic.enabled);
     
-    if(isStarted === true){
+    if(isStarted === true && mic.enabled === true){
        drawFlowLine();
        if(isDescribed === true){
           description();
@@ -139,6 +134,7 @@ function touchStarted() {
         mic = new p5.AudioIn();
         mic.start();
         userStartAudio();
+        isStarted = true;
     }
     
 }
