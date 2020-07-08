@@ -46,7 +46,6 @@ function draw() {
     
     //flowline start
     if(isStarted === true){
-       mic.start();
        drawFlowLine();
        if(isDescribed == true){
           description();
@@ -62,7 +61,7 @@ function introduction(){
 }
 
 function drawFlowLine(){
-    
+    mic.start();
     elapsedTime = float(millis()) / 1000 - startTime;
     
     background(0);
