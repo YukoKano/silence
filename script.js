@@ -20,7 +20,6 @@ function setup() {
     
     //マイク設定
     mic = new p5.AudioIn();
-    mic.start();
     
     textAlign(CENTER, CENTER);
     isStarted = false;
@@ -44,6 +43,7 @@ function draw() {
     
     //flowline start
     if(isStarted == true){
+       mic.start();
        drawFlowLine();
        if(isDescribed == true){
           description();
