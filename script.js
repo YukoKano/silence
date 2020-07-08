@@ -22,9 +22,7 @@ function setup() {
     
     textAlign(CENTER, CENTER);
     
-    mic = new p5.AudioIn();
-    userStartAudio();
-    mic.start();
+    
         
     isStarted = false;
     isDescribed = false;
@@ -47,8 +45,12 @@ function draw() {
     
     //flowline start
     if(isStarted === true){
+       mic = new p5.AudioIn();
+       userStartAudio();
+       mic.start();
+        
        drawFlowLine();
-       if(isDescribed == true){
+       if(isDescribed === true){
           description();
        }
     }
@@ -127,9 +129,9 @@ function description(){
 }
 
 function touchStarted() {
-    if(isStarted == true && isDescribed == false){
+    if(isStarted === true && isDescribed === false){
        isDescribed = true;
-    }else if(isStarted == true && isDescribed == true){
+    }else if(isStarted === true && isDescribed === true){
        isDescribed = false;
     }
     
