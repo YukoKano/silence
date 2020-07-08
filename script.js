@@ -16,14 +16,14 @@ function preload() {
 
 function setup() {
   // キャンバスをつくる
-  createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowHeight);
     
-    colorMode(HSB, 100);
-    
+    colorMode(HSB, 100);    
     textAlign(CENTER, CENTER);
     
-    
+    mic = new p5.AudioIn();
         
+
     isStarted = false;
     isDescribed = false;
 
@@ -45,10 +45,9 @@ function draw() {
     
     //flowline start
     if(isStarted === true){
-       mic = new p5.AudioIn();
-       userStartAudio();
+       
        mic.start();
-        
+       userStartAudio();
        drawFlowLine();
        if(isDescribed === true){
           description();
@@ -99,13 +98,13 @@ function drawFlowLine(){
     strokeWeight(1 + noise(seed + j) * 1.5);
     stroke(c);
     
-        for(var i=-50; i < height + 50; i+=4){
+        for(var i=-50; i < height + 50; i+=3){
           let pre_y = i + 50 * noise(seed * 0.01);
             
           let pos = createVector(pre_x, pre_y);
           let vec = flow.lookup(pos);
             
-          let y = pre_y + 4 + vec.y;
+          let y = pre_y + 3 + vec.y;
           let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/3 * cos(i * 0.03 + seed * 0.5) + width / 2 + vec.x;
             
           line(pre_x, pre_y, x, y);
