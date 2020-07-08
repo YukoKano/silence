@@ -21,6 +21,10 @@ function setup() {
     colorMode(HSB, 100);
     
     textAlign(CENTER, CENTER);
+    
+    mic = new p5.AudioIn();
+    userStartAudio();
+        
     isStarted = false;
     isDescribed = false;
 
@@ -36,15 +40,13 @@ function setup() {
 // 計算と表示
 function draw() {
     //first
-    if(isStarted == false){
+    if(isStarted === false){
        introduction();
     }
     
     //flowline start
-    if(isStarted == true){
-       mic = new p5.AudioIn();
-       userStartAudio();
-        
+    if(isStarted === true){
+       mic.start();
        drawFlowLine();
        if(isDescribed == true){
           description();
@@ -60,7 +62,6 @@ function introduction(){
 }
 
 function drawFlowLine(){
-    mic.start();
     
     elapsedTime = float(millis()) / 1000 - startTime;
     
