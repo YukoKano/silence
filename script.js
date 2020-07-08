@@ -7,6 +7,9 @@ let startTime;
 
 let isStarted;
 let isDescribed;
+let isTapped;
+
+let txtAlpha = 0;
 
 function preload() {
     //メニューバー諸々の削除
@@ -20,9 +23,12 @@ function setup() {
     
     colorMode(HSB, 100);    
     textAlign(CENTER, CENTER);
+    textFont(loadFont("assets/EBGaramond-Regular.ttf"));
+    
 
     isStarted = false;
     isDescribed = false;
+    isTapped = true;
 
     
     flow = new FlowField(40);
@@ -36,28 +42,80 @@ function setup() {
 // 計算と表示
 function draw() {
     //first
-    if(isStarted === false){
+    if(isStarted == false){
        introduction();
+        
+        if(txtAlpha == 0){
+            isStarted = true;
+        }
     }
     
     //flowline start
-    if(isStarted === true && mic.enabled === true){
+    if(isStarted == true && mic.enabled == true){
        drawFlowLine();
-       if(isDescribed === true){
+        
+       if(isDescribed == true){
           description();
        }
     }
 }
 
+
+
+
+
 function introduction(){
+    if(isTapped == true && txtAlpha < 100){
+        txtAlpha++;
+    }else if(isDescribed == true && txtAlpha >= 100){
+        txtAlpha = 100;
+    }
+    
+    if(isTapped == false && txtAlpha > 0){
+        txtAlpha--;
+    }else if(isTapped == false && txtAlpha < 0){
+        txtAlpha = 0;
+    }
+    
     background(0);
-    textSize(32);
-    fill(0, 0, 100);
-    text('Silence',width/2, height/2);
+    textSize(60);
+    fill(0, 0, 100, txtAlpha);
+    text('Silence', width/2, height/2 - 50);
+    
+    textSize(21);
+    textLeading(24);
+    text('Please touch\nand\nallow access to microphone.', width/2, height/2 + 100);
+}
+
+function description(){
+    background(0, 0, 0, txtAlpha / 2);
+    
+    if(isTapped == true && txtAlpha < 100){
+        txtAlpha += 5;
+    }else if(isTapped == true && txtAlpha >= 100){
+        txtAlpha = 100;
+    }
+    
+    if(isTapped == false && txtAlpha > 0){
+        txtAlpha -= 5;
+    }else if(isTapped == false && txtAlpha <= 0){
+        txtAlpha = 0;
+        isDescribed = false;
+    }
+    
+    textSize(35);
+    fill(0, 0, 100, txtAlpha);
+    text('About', width/2, height/2 - 100);
+    
+    textSize(22);
+    text("The concept of this work is 'silence'.\nIf you wait without making a sound, you'll see a wave.\nThe color changes according to the time of day.\n\n#p5.js", width/2, height/2+30);
+    
+    
+    textSize(16);
+    text('Created by Yuko Kano.', width/2, height - 50);
 }
 
 function drawFlowLine(){
-
     elapsedTime = float(millis()) / 1000 - startTime;
     
     background(0);
@@ -111,26 +169,22 @@ function drawFlowLine(){
 
 }
 
-function description(){
-    background(0, 30);
-    textSize(32);
-    fill(0, 0, 100);
-    text('説明', width/2, height/2);
-}
+
 
 function touchStarted() {   
-    if(isStarted === true && isDescribed === false){
+    if(isStarted == true && isDescribed == false){
        isDescribed = true;
-    }else if(isStarted === true && isDescribed === true){
-       isDescribed = false;
+       isTapped = true;
+    }else if(isStarted == true && isDescribed == true){
+       isTapped = false;
     }
     
-    if(isStarted === false){
+    if(isStarted == false){
         mic = new p5.AudioIn();
         mic.start();
         userStartAudio();
         
-        isStarted = true;
+        isTapped = false;
     }
     
 }
