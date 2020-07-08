@@ -78,6 +78,7 @@ function introduction(){
     }
     
     background(0);
+    noStroke();
     textSize(60);
     fill(0, 0, 100, txtAlpha);
     text('Silence', width/2, height/2 - 50);
@@ -102,6 +103,8 @@ function description(){
         txtAlpha = 0;
         isDescribed = false;
     }
+    
+    noStroke();
     
     textSize(32);
     fill(0, 0, 100, txtAlpha);
