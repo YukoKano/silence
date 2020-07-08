@@ -85,7 +85,7 @@ function introduction(){
     
     textSize(21);
     textLeading(24);
-    text('Please touch\nand\nallow access to microphone.', width/2, height/2 + 100);
+    text("Please touch\nand\nallow access to microphone.\n\nIf you don't do it, nothing happens.", width/2, height/2 + 100);
 }
 
 function description(){
@@ -108,10 +108,10 @@ function description(){
     
     textSize(32);
     fill(0, 0, 100, txtAlpha);
-    text('About', width/2, height/2 - 50);
+    text('About', width/2, height/2 - 70);
     
     textSize(18);
-    text("The concept of this work is 'silence'.\nIf you wait without making a sound, you'll see a wave.\nThe color changes according to the time of day.\n\n#p5.js", width/2, height/2 + 30);
+    text("The concept of this work is 'silence'.\nIf you wait without making a sound, you'll see a wave.\nThe color changes according to the time of day.\n\n#p5.js", width/2, height/2 + 50);
     
     
     textSize(12);
