@@ -115,7 +115,7 @@ function drawFlowLine(){
     }
     
     fill(0, 0, 100);
-    text(floor(frameRate()), width/2, height/2);
+    text(floor(alpha), width/2, height/2);
 
 }
 
@@ -134,7 +134,6 @@ function touchStarted() {
     }
     
     isStarted = true;
-    
 }
 
 //参考資料
