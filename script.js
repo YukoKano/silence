@@ -44,6 +44,8 @@ function draw() {
     //flowline start
     if(isStarted == true){
        mic.start();
+       userStartAudio();
+        
        drawFlowLine();
        if(isDescribed == true){
           description();
@@ -126,7 +128,7 @@ function touchStarted() {
     }
     
     isStarted = true;
-    userStartAudio();
+    
 }
 
 //参考資料
