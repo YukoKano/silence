@@ -44,6 +44,10 @@ function draw() {
     }
     
     //flowline start
+    if(mic.enabled == true){
+            isStarted = true;
+    }
+    
     if(isStarted === true){
        drawFlowLine();
        if(isDescribed === true){
@@ -135,9 +139,6 @@ function touchStarted() {
         mic = new p5.AudioIn();
         mic.start();
         userStartAudio();
-        if(mic.enabled == true){
-            isStarted = true;
-        }
     }
     
 }
