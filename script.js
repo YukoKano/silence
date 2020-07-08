@@ -1,10 +1,12 @@
 let mic;
 let alpha = 0;
-let bg = 0;
 
 let flow;
 let elapsedTime;
 let startTime;
+
+let isStarted;
+let isDescribed;
 
 function setup() {
   // キャンバスをつくる
@@ -13,16 +15,16 @@ function setup() {
     colorMode(HSB, 100);
     
     //メニューバー諸々の削除
-  window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
-  window.addEventListener("touchmove", function (event) { event.preventDefault(); }, { passive: false });
+    window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
+    window.addEventListener("touchmove", function (event) { event.preventDefault(); }, { passive: false });
     
     //マイク設定
     mic = new p5.AudioIn();
     mic.start();
     
-    //これだいじ ブラウザでマイク許可
-    userStartAudio();  
-    
+    textAlign(CENTER, CENTER);
+    isStarted = false;
+    isDescribed = false;
 
     
     flow = new FlowField(40);
@@ -35,19 +37,40 @@ function setup() {
 
 // 計算と表示
 function draw() {
+    //first
+    if(isStarted == false){
+       introduction();
+    }
+    
+    //flowline start
+    if(isStarted == true){
+       userStartAudio();  
+        
+       drawFlowLine();
+       if(isDescribed == true){
+          description();
+       }
+    }
+}
+
+function introduction(){
+    background(0);
+    textSize(32);
+    fill(0, 0, 100);
+    text('Silence',width/2, height/2);
+}
+
+function drawFlowLine(){
     elapsedTime = float(millis()) / 1000 - startTime;
     
-  // 背景をぬりつぶす
-    background(bg);
+    background(0);
     
     let h = map(hour(), 0, 24, 0, TWO_PI);
     
     flow.update();
     flow.time = elapsedTime;
     
-    
-    //数値
-    //マイク音量取得
+    //mic volume
     let vol = mic.getLevel() * 50;
     
     
@@ -88,8 +111,23 @@ function draw() {
         }
 
     }
+}
+
+function description(){
+    background(0, 30);
+    textSize(32);
+    fill(0, 0, 100);
+    text('説明', width/2, height/2);
+}
+
+function touchStarted() {
+    if(isStarted == true && isDescribed == false){
+       isDescribed = true;
+    }else if(isStarted == true && isDescribed == true){
+       isDescribed = false;
+    }
     
-    console.log(alpha);
+    isStarted = true;
 }
 
 //参考資料
