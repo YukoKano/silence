@@ -135,8 +135,8 @@ function touchStarted() {
     }
     
     if(isStarted === false){
-        isStarted = true;
         mic = new p5.AudioIn();
+        isStarted = true;
     }
     
 }
