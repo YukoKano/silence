@@ -98,13 +98,13 @@ function drawFlowLine(){
     strokeWeight(1 + noise(seed + j) * 1.5);
     stroke(c);
     
-        for(var i=-50; i < height + 50; i+=3){
+        for(var i=-50; i < height + 50; i+=4){
           let pre_y = i + 50 * noise(seed * 0.01);
             
           let pos = createVector(pre_x, pre_y);
           let vec = flow.lookup(pos);
             
-          let y = pre_y + 3 + vec.y;
+          let y = pre_y + 4 + vec.y;
           let x = noise(seed + 0.03 * (i+1), noise(seed)*0.8) * width/3 * cos(i * 0.03 + seed * 0.5) + width / 2 + vec.x;
             
           line(pre_x, pre_y, x, y);
@@ -114,6 +114,9 @@ function drawFlowLine(){
         }
 
     }
+    
+    fill(0, 0, 100);
+    text(floor(frameRate()), width/2, height/2);
 
 }
 
