@@ -43,7 +43,6 @@ function draw() {
     //flowline start
     if(isStarted == true){
        mic = new p5.AudioIn();
-       mic.start();
        userStartAudio();
         
        drawFlowLine();
@@ -61,8 +60,7 @@ function introduction(){
 }
 
 function drawFlowLine(){
-    
-    
+    mic.start();
     
     elapsedTime = float(millis()) / 1000 - startTime;
     
