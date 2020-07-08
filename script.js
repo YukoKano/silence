@@ -135,7 +135,9 @@ function touchStarted() {
         mic = new p5.AudioIn();
         mic.start();
         userStartAudio();
-        isStarted = true;
+        if(mic.enabled == true){
+            isStarted = true;
+        }
     }
     
 }
