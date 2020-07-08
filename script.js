@@ -103,15 +103,15 @@ function description(){
         isDescribed = false;
     }
     
-    textSize(35);
+    textSize(32);
     fill(0, 0, 100, txtAlpha);
     text('About', width/2, height/2 - 100);
     
-    textSize(22);
-    text("The concept of this work is 'silence'.\nIf you wait without making a sound, you'll see a wave.\nThe color changes according to the time of day.\n\n#p5.js", width/2, height/2+30);
+    textSize(18);
+    text("The concept of this work is 'silence'.\nIf you wait without making a sound, you'll see a wave.\nThe color changes according to the time of day.\n\n#p5.js", width/2, height/2 + 30);
     
     
-    textSize(16);
+    textSize(12);
     text('Created by Yuko Kano.', width/2, height - 50);
 }
 
