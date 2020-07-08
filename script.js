@@ -24,6 +24,7 @@ function setup() {
     
     mic = new p5.AudioIn();
     userStartAudio();
+    mic.start();
         
     isStarted = false;
     isDescribed = false;
@@ -61,7 +62,7 @@ function introduction(){
 }
 
 function drawFlowLine(){
-    mic.start();
+
     elapsedTime = float(millis()) / 1000 - startTime;
     
     background(0);
