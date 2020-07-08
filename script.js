@@ -21,7 +21,7 @@ function setup() {
     colorMode(HSB, 100);    
     textAlign(CENTER, CENTER);
     
-    mic = new p5.AudioIn();
+    
         
 
     isStarted = false;
@@ -127,14 +127,18 @@ function description(){
     text('説明', width/2, height/2);
 }
 
-function touchStarted() {
+function touchStarted() {   
     if(isStarted === true && isDescribed === false){
        isDescribed = true;
     }else if(isStarted === true && isDescribed === true){
        isDescribed = false;
     }
     
-    isStarted = true;
+    if(isStarted === false){
+        isStarted = true;
+        mic = new p5.AudioIn();
+    }
+    
 }
 
 //参考資料
